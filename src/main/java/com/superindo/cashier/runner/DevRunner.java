@@ -2,6 +2,7 @@ package com.superindo.cashier.runner;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.github.javafaker.Faker;
 import com.superindo.cashier.model.Product;
 import com.superindo.cashier.model.ProductCategory;
 import com.superindo.cashier.model.ProductVariant;
@@ -155,6 +157,15 @@ public class DevRunner implements CommandLineRunner {
 		drinkCategory.setName("Minuman");
 		drinkCategory.setActive(true);
 		productCategoryRepository.save(drinkCategory);
+
+		Faker faker = new Faker(new Locale("in-ID"));
+		for (int index = 0; index < 100; index++) {
+			String randomCategory = faker.commerce().department();
+			ProductCategory tempCategory = new ProductCategory();
+			tempCategory.setName(randomCategory);
+			tempCategory.setActive(true);
+			productCategoryRepository.save(tempCategory);
+		}
 
 	}
 
