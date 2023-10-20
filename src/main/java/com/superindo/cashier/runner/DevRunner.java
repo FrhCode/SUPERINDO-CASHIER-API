@@ -49,6 +49,10 @@ public class DevRunner implements CommandLineRunner {
 
 		generateVariant();
 
+		generateTransaction();
+	}
+
+	private void generateTransaction() {
 		transactionTemplate.execute(transactionStatus -> {
 			try {
 				ProductVariant productVariant1 = productVariantRepository.findById(1L).get();
@@ -90,6 +94,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie1.setQty(1000L);
 		indomie1.setPrice(new BigDecimal("3000"));
 		indomie1.setActive(true);
+		indomie1.setThumbnail("/indomie-goreng.jpg");
 		productVariantRepository.save(indomie1);
 
 		ProductVariant indomie2 = new ProductVariant();
@@ -99,6 +104,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie2.setQty(500L);
 		indomie2.setPrice(new BigDecimal("2700"));
 		indomie2.setActive(true);
+		indomie2.setThumbnail("/indomie-ayam-bawang.png");
 		productVariantRepository.save(indomie2);
 
 		ProductVariant indomie3 = new ProductVariant();
@@ -108,6 +114,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie3.setQty(1000L);
 		indomie3.setPrice(new BigDecimal("3200"));
 		indomie3.setActive(true);
+		indomie3.setThumbnail("/indomie-goreng-aceh.jpg");
 		productVariantRepository.save(indomie3);
 	}
 
@@ -170,7 +177,7 @@ public class DevRunner implements CommandLineRunner {
 				user.setEmail("farhan7534031b@gmail.com");
 				user.setPhoneNumber("082188513499");
 				user.setPassword(passwordEncoder.encode("indonesia123B"));
-				user.setProfileImage("");
+				user.setProfileImage("/james-person-1.jpg");
 
 				Optional<Role> optionalRole = roleRepository.findByName("administrator");
 

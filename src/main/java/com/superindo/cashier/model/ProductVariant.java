@@ -35,6 +35,9 @@ public class ProductVariant extends Audit {
 	private String name;
 
 	@Column(nullable = false)
+	private String thumbnail;
+
+	@Column(nullable = false)
 	private Long qty;
 
 	@Column(nullable = false)
