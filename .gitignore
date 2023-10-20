@@ -38,7 +38,5 @@ build/
 *.properties
 
 # Except application.properties and application-profile.properties
-!application.properties
-!application-profile.properties
 
 *.pdf
