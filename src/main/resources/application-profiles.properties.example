@@ -1,0 +1,15 @@
+spring.datasource.url= jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=cashier
+spring.datasource.username= sa
+spring.datasource.password= Rahasia@1
+
+
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.SQLServerDialect
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+logging.level.org.springframework.jdbc.core=debug
+
+application.security.jwt.secret-key=JC74ZUNNBFCZxF4dOVUlheMYv2TUv0VXxrgd4UkZ4E+KtBnAlZqPTPINjSWxosH623xFfT+1ozsc1BYeKawnM22fDvyy6Wnmp1oSXVY9YHGSFrBKIrT6LyksVhjlG2lrBoDSXYsOU2AkcYeR0pZ9Ku+uWa4E715D4wPx3TkJWXUHse9wr5gdYIazzXnKqdQRErUCKADVngl2S7B8G1KpLvAzn8mJt1J9bTf1pys08JkiX9rVLzxzzDSUZ2EeCtxwPrD+YJXB8EaebeKZn1EYeDWEuwBJf3PIw2SaYOg3HyPhQ72gMHRbKlPUR4PUv4+fUezx5Bxo8X5B6d4V2ary7rSOmZgwyYdLK3QtjV5r6Cc=
+# a day 
+application.security.jwt.expiration=86400000
