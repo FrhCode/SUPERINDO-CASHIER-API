@@ -26,7 +26,7 @@ public class ProductCategoryCriteriaRepository {
 	private final EntityManager em;
 
 	public Page<ProductCategory> paginate(PaginateProductCategoryRequest request) {
-		Integer pageNumber = request.getPage() - 1;
+		Integer pageNumber = request.getPage();
 		Integer pageSize = request.getSize();
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -64,7 +64,7 @@ public class ProductCategoryCriteriaRepository {
 	}
 
 	private Pageable getPageable(PaginateProductCategoryRequest request) {
-		Integer pageNumber = request.getPage() - 1;
+		Integer pageNumber = request.getPage();
 		Integer pageSize = request.getSize();
 
 		Sort sort = Sort.by(request.getSortDirection(), request.getSortBy());
