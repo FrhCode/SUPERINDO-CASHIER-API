@@ -26,7 +26,7 @@ public class ProductCategoryCriteriaRepository {
 	private final EntityManager em;
 
 	public Page<ProductCategory> paginate(PaginateProductCategoryRequest request) {
-		Integer pageNumber = request.getPage();
+		Integer pageNumber = request.getPage() - 1;
 		Integer pageSize = request.getSize();
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -64,7 +64,7 @@ public class ProductCategoryCriteriaRepository {
 	}
 
 	private Pageable getPageable(PaginateProductCategoryRequest request) {
-		Integer pageNumber = request.getPage();
+		Integer pageNumber = request.getPage() - 1;
 		Integer pageSize = request.getSize();
 
 		Sort sort = Sort.by(request.getSortDirection(), request.getSortBy());
@@ -89,9 +89,13 @@ public class ProductCategoryCriteriaRepository {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (request.getQuery() != null) {
-			Predicate nameLike = cb.like(root.get("name"), "%" + request.getQuery() + "%");
+			Predicate nameLike = cb.like(
+					cb.lower(root.get("name")),
+					"%" + request.getQuery().toLowerCase() + "%");
+
 			predicates.add(nameLike);
 		}
+
 		return cb.or(predicates.toArray(new Predicate[0]));
 	}
 }
