@@ -21,6 +21,7 @@ import com.superindo.cashier.model.ProductVariant;
 import com.superindo.cashier.request.CreateProductRequest;
 import com.superindo.cashier.request.CreateProductVariantRequest;
 import com.superindo.cashier.request.PaginateProductRequest;
+import com.superindo.cashier.request.PaginateProductVariantRequest;
 import com.superindo.cashier.request.UpdateProductRequest;
 import com.superindo.cashier.response.BaseResponse;
 import com.superindo.cashier.response.MessageResponse;
@@ -38,6 +39,18 @@ public class ProductController {
 	private final ProductService productService;
 	private final ProductVariantService productVariantService;
 	private final ProductCategoryService productCategoryService;
+
+	@GetMapping("{productId}/variants")
+	public Page<ProductVariant> paginateVariant(@PathVariable Long productId,
+			PaginateProductVariantRequest request) {
+		Optional<Product> optionalProduct = productService.findById(request.getProductId());
+		request.setProductId(productId);
+		if (optionalProduct.isEmpty()) {
+			throw new ResourceNotFoundException();
+		}
+
+		return productVariantService.paginate(request);
+	}
 
 	@GetMapping
 	public Page<Product> index(PaginateProductRequest request) {
@@ -72,21 +85,21 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
 	}
 
-	@GetMapping("{id}/variants")
-	public BaseResponse<ProductVariant> variant(@PathVariable Long id) {
+	// @GetMapping("{id}/variants")
+	// public BaseResponse<ProductVariant> variant(@PathVariable Long id) {
 
-		Optional<Product> optionalProduct = productService.findById(id);
+	// Optional<Product> optionalProduct = productService.findById(id);
 
-		if (optionalProduct.isEmpty()) {
-			throw new ResourceNotFoundException();
-		}
+	// if (optionalProduct.isEmpty()) {
+	// throw new ResourceNotFoundException();
+	// }
 
-		Product product = optionalProduct.get();
+	// Product product = optionalProduct.get();
 
-		BaseResponse<ProductVariant> response = new BaseResponse<>();
-		response.setContent(new ArrayList<>(product.getProductVariants()));
-		return response;
-	}
+	// BaseResponse<ProductVariant> response = new BaseResponse<>();
+	// response.setContent(new ArrayList<>(product.getProductVariants()));
+	// return response;
+	// }
 
 	@PostMapping("{id}/variants")
 	public ResponseEntity<MessageResponse> createVariant(@PathVariable Long id,
