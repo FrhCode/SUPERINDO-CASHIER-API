@@ -13,7 +13,6 @@ import com.superindo.cashier.request.CreateProductRequest;
 import com.superindo.cashier.request.PaginateProductRequest;
 import com.superindo.cashier.request.UpdateProductRequest;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service

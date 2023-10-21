@@ -1,20 +1,5 @@
 package com.superindo.cashier.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.superindo.cashier.exception.ResourceNotFoundException;
-import com.superindo.cashier.model.Product;
-import com.superindo.cashier.model.ProductVariant;
-import com.superindo.cashier.request.PaginateProductVariantRequest;
-import com.superindo.cashier.request.UpdateProductVariantRequest;
-import com.superindo.cashier.response.MessageResponse;
-import com.superindo.cashier.service.ProductService;
-import com.superindo.cashier.service.ProductVariantService;
-
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -24,13 +9,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.superindo.cashier.exception.ResourceNotFoundException;
+import com.superindo.cashier.model.ProductVariant;
+import com.superindo.cashier.request.PaginateProductVariantRequest;
+import com.superindo.cashier.request.UpdateProductVariantRequest;
+import com.superindo.cashier.response.MessageResponse;
+import com.superindo.cashier.service.ProductVariantService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/product_variants")
 @RequiredArgsConstructor
 public class ProductVariantController {
 	private final ProductVariantService productVariantService;
-	private final ProductService productService;
 
 	@GetMapping
 	public Page<ProductVariant> index(PaginateProductVariantRequest request) {
