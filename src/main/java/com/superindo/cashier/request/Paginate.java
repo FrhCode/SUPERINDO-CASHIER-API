@@ -15,4 +15,10 @@ abstract class Paginate {
 	private Integer size = 25;
 	private String sortBy = "id";
 	private Sort.Direction sortDirection = Sort.Direction.ASC;
+
+	public void setSortBy(String sortBy) {
+		if (!sortBy.isEmpty()) {
+			this.sortBy = sortBy;
+		}
+	}
 }
