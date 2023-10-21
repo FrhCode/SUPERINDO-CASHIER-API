@@ -129,6 +129,7 @@ public class DevRunner implements CommandLineRunner {
 		cheetos.setName("Cheetos");
 		cheetos.setProductCategory(foodCategory);
 		cheetos.setActive(true);
+		cheetos.setThumbnail("/images/GUEST_b9c6571e-95ba-4f20-bd17-e623f8d4ab7d.webp");
 		productRepository.save(cheetos);
 
 		Product indomie = new Product();
@@ -136,6 +137,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie.setName("Indomie");
 		indomie.setProductCategory(foodCategory);
 		indomie.setActive(true);
+		indomie.setThumbnail("/images/indomie-ayam-bawang.png");
 		productRepository.save(indomie);
 
 		Product airMineralAqua = new Product();
@@ -143,6 +145,7 @@ public class DevRunner implements CommandLineRunner {
 		airMineralAqua.setName("Air Mineral Aqua");
 		airMineralAqua.setProductCategory(drinkCategory);
 		airMineralAqua.setActive(true);
+		airMineralAqua.setThumbnail("/images/RDS_HTC_Products_481657_image_B608_422143147.jpg");
 		productRepository.save(airMineralAqua);
 
 	}

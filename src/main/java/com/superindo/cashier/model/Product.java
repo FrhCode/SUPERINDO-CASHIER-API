@@ -38,6 +38,9 @@ public class Product extends Audit {
 	@Column(nullable = false)
 	private Boolean active;
 
+	@Column(nullable = false)
+	private String thumbnail;
+
 	@ManyToOne
 	@JoinColumn(name = "product_category_id")
 	@JsonIgnore
