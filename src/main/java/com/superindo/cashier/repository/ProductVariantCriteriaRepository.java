@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.superindo.cashier.model.ProductVariant;
 import com.superindo.cashier.request.PaginateProductVariantRequest;
+import com.superindo.cashier.service.ProductService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductVariantCriteriaRepository {
 	private final EntityManager em;
+	private final ProductService productService;
 
 	public Page<ProductVariant> paginate(PaginateProductVariantRequest request) {
 		Integer pageNumber = request.getPage();
@@ -95,6 +97,9 @@ public class ProductVariantCriteriaRepository {
 			Predicate codeLike = cb.like(root.get("code"), "%" + request.getQuery() + "%");
 			predicates.add(codeLike);
 		}
-		return cb.or(predicates.toArray(new Predicate[0]));
+
+		Predicate productId = cb.equal(root.get("product"), productService.findById(request.getProductId()).get());
+
+		return cb.and(productId, cb.or(predicates.toArray(new Predicate[0])));
 	}
 }
