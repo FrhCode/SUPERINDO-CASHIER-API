@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.superindo.cashier.model.ProductCategory;
 import com.superindo.cashier.repository.ProductCategoryCriteriaRepository;
 import com.superindo.cashier.repository.ProductCategoryRepository;
+import com.superindo.cashier.request.CreateProductCategoryRequest;
 import com.superindo.cashier.request.PaginateProductCategoryRequest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -28,5 +30,13 @@ public class ProductCategoryService {
 
 	public Optional<ProductCategory> findById(Long id) {
 		return productCategoryRepository.findById(id);
+	}
+
+	public void create(@Valid CreateProductCategoryRequest request) {
+		ProductCategory productCategory = new ProductCategory();
+		productCategory.setActive(request.getActive());
+		productCategory.setName(request.getName());
+
+		productCategoryRepository.save(productCategory);
 	}
 }
