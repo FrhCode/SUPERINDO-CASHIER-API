@@ -96,7 +96,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie1.setQty(1000L);
 		indomie1.setPrice(new BigDecimal("3000"));
 		indomie1.setActive(true);
-		indomie1.setThumbnail("/images/indomie-goreng.jpg");
+		indomie1.setThumbnail("images/indomie-goreng.jpg");
 		productVariantRepository.save(indomie1);
 
 		ProductVariant indomie2 = new ProductVariant();
@@ -106,7 +106,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie2.setQty(500L);
 		indomie2.setPrice(new BigDecimal("2700"));
 		indomie2.setActive(true);
-		indomie2.setThumbnail("/images/indomie-ayam-bawang.png");
+		indomie2.setThumbnail("images/indomie-ayam-bawang.png");
 		productVariantRepository.save(indomie2);
 
 		ProductVariant indomie3 = new ProductVariant();
@@ -116,7 +116,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie3.setQty(1000L);
 		indomie3.setPrice(new BigDecimal("3200"));
 		indomie3.setActive(true);
-		indomie3.setThumbnail("/images/indomie-goreng-aceh.jpg");
+		indomie3.setThumbnail("images/indomie-goreng-aceh.jpg");
 		productVariantRepository.save(indomie3);
 	}
 
@@ -129,7 +129,7 @@ public class DevRunner implements CommandLineRunner {
 		cheetos.setName("Cheetos");
 		cheetos.setProductCategory(foodCategory);
 		cheetos.setActive(true);
-		cheetos.setThumbnail("/images/GUEST_b9c6571e-95ba-4f20-bd17-e623f8d4ab7d.webp");
+		cheetos.setThumbnail("images/GUEST_b9c6571e-95ba-4f20-bd17-e623f8d4ab7d.webp");
 		productRepository.save(cheetos);
 
 		Product indomie = new Product();
@@ -137,7 +137,7 @@ public class DevRunner implements CommandLineRunner {
 		indomie.setName("Indomie");
 		indomie.setProductCategory(foodCategory);
 		indomie.setActive(true);
-		indomie.setThumbnail("/images/indomie-ayam-bawang.png");
+		indomie.setThumbnail("images/indomie-ayam-bawang.png");
 		productRepository.save(indomie);
 
 		Product airMineralAqua = new Product();
@@ -145,7 +145,7 @@ public class DevRunner implements CommandLineRunner {
 		airMineralAqua.setName("Air Mineral Aqua");
 		airMineralAqua.setProductCategory(drinkCategory);
 		airMineralAqua.setActive(true);
-		airMineralAqua.setThumbnail("/images/RDS_HTC_Products_481657_image_B608_422143147.jpg");
+		airMineralAqua.setThumbnail("images/RDS_HTC_Products_481657_image_B608_422143147.jpg");
 		productRepository.save(airMineralAqua);
 
 	}
@@ -196,7 +196,7 @@ public class DevRunner implements CommandLineRunner {
 				user.setEmail("farhan7534031b@gmail.com");
 				user.setPhoneNumber("082188513499");
 				user.setPassword(passwordEncoder.encode("indonesia123B"));
-				user.setProfileImage("/images/james-person-1.jpg");
+				user.setProfileImage("images/james-person-1.jpg");
 
 				Optional<Role> optionalRole = roleRepository.findByName("administrator");
 

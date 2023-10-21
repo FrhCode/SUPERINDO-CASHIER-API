@@ -35,7 +35,7 @@ public class UploadController {
 
 			Files.write(path, bytes);
 
-			String relativePath = "/images/" + fileName;
+			String relativePath = "images/" + fileName;
 			return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(relativePath));
 		} catch (Exception e) {
 			System.out.println(e);
