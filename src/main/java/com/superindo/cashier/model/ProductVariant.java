@@ -28,7 +28,7 @@ public class ProductVariant extends Audit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, updatable = false)
 	private String code;
 
 	@Column(nullable = false)

@@ -10,6 +10,7 @@ import com.superindo.cashier.repository.ProductCategoryCriteriaRepository;
 import com.superindo.cashier.repository.ProductCategoryRepository;
 import com.superindo.cashier.request.CreateProductCategoryRequest;
 import com.superindo.cashier.request.PaginateProductCategoryRequest;
+import com.superindo.cashier.request.UpdateProductCategoryRequest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,13 @@ public class ProductCategoryService {
 		productCategoryRepository.save(productCategory);
 	}
 
+	public void update(ProductCategory productCategory, UpdateProductCategoryRequest request) {
+		productCategory.setActive(request.getActive());
+		productCategory.setName(request.getName());
+
+		update(productCategory);
+	}
+
 	public Optional<ProductCategory> findById(Long id) {
 		return productCategoryRepository.findById(id);
 	}
@@ -39,4 +47,5 @@ public class ProductCategoryService {
 
 		productCategoryRepository.save(productCategory);
 	}
+
 }

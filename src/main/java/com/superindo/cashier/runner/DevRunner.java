@@ -158,6 +158,11 @@ public class DevRunner implements CommandLineRunner {
 		drinkCategory.setActive(true);
 		productCategoryRepository.save(drinkCategory);
 
+		ProductCategory detergentCategory = new ProductCategory();
+		detergentCategory.setName("Detergen");
+		detergentCategory.setActive(true);
+		productCategoryRepository.save(detergentCategory);
+
 		Faker faker = new Faker(new Locale("in-ID"));
 		for (int index = 0; index < 100; index++) {
 			String randomCategory = faker.commerce().department();

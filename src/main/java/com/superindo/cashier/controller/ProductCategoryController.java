@@ -50,10 +50,8 @@ public class ProductCategoryController {
 		if (optionalProductCategory.isEmpty()) {
 			throw new ResourceNotFoundException();
 		}
-		ProductCategory productCategory = optionalProductCategory.get();
-		productCategory.setActive(request.getActive());
-		productCategory.setName(request.getName());
-		productCategoryService.update(productCategory);
+
+		productCategoryService.update(optionalProductCategory.get(), request);
 
 		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
 	}
