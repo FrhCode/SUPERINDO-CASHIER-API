@@ -47,7 +47,7 @@ public class ProductService {
 	public void save(Product product, UpdateProductRequest request) {
 		product.setActive(request.getActive());
 		product.setName(request.getName());
-
+		product.setThumbnail(request.getThumbnail());
 		save(product);
 	}
 }
