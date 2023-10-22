@@ -31,11 +31,11 @@ public class UploadController {
 		try {
 			byte[] bytes = file.getBytes();
 			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-			Path path = Paths.get("src/main/resources/static/images/" + fileName);
+			Path path = Paths.get("uploads" + fileName);
 
 			Files.write(path, bytes);
 
-			String relativePath = "images/" + fileName;
+			String relativePath = "uploads/" + fileName;
 			return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(relativePath));
 		} catch (Exception e) {
 			System.out.println(e);
