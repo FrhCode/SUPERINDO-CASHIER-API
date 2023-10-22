@@ -39,6 +39,7 @@ public class ProductService {
 		product.setName(request.getName());
 		product.setPlu(request.getPlu());
 		product.setProductCategory(productCategory);
+		product.setThumbnail(request.getThumbnail());
 
 		save(product);
 	}

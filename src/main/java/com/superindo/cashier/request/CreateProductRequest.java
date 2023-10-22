@@ -1,5 +1,6 @@
 package com.superindo.cashier.request;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -16,6 +17,9 @@ public class CreateProductRequest {
 
 	@NotNull(message = "active tidak boleh kosong")
 	private Boolean active;
+
+	@NotBlank(message = "thumbnail tidak boleh kosong")
+	private String thumbnail;
 
 	@NotNull(message = "product_category_id tidak boleh kosong")
 	private Long productCategoryId;
