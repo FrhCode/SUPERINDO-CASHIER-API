@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,10 @@ import com.superindo.cashier.model.ProductVariant;
 import com.superindo.cashier.model.Transaction;
 import com.superindo.cashier.model.TransactionDetail;
 import com.superindo.cashier.model.User;
+import com.superindo.cashier.repository.TransactionCriteriaRepository;
 import com.superindo.cashier.repository.TransactionDetailRepository;
 import com.superindo.cashier.repository.TransactionRepository;
+import com.superindo.cashier.request.PaginateTransactionRequest;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,7 @@ public class TransactionService {
 	private final TransactionRepository transactionRepository;
 	private final ProductVariantService productVariantService;
 	private final TransactionDetailRepository transactionDetailRepository;
+	private final TransactionCriteriaRepository transactionCriteriaRepository;
 	private final CartService cartService;
 	private final EntityManager em;
 
@@ -177,5 +181,9 @@ public class TransactionService {
 		return em.createQuery("SELECT t FROM Transaction t ORDER BY t.createdDate DESC", Transaction.class)
 				.setMaxResults(number)
 				.getResultList();
+	}
+
+	public Page<Transaction> paginate(PaginateTransactionRequest paginateTransactionRequest) {
+		return transactionCriteriaRepository.paginate(paginateTransactionRequest);
 	}
 }

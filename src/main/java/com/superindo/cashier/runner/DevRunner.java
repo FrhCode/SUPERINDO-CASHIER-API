@@ -3,7 +3,6 @@ package com.superindo.cashier.runner;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -216,20 +215,28 @@ public class DevRunner implements CommandLineRunner {
 	private void generateUser() {
 		transactionTemplate.execute(transactionStatus -> {
 			try {
-				User user = new User();
-				user.setName("Mohammad Farhan Fajrul Haq");
-				user.setEmail("farhan7534031b@gmail.com");
-				user.setPhoneNumber("082188513499");
-				user.setPassword(passwordEncoder.encode("indonesia123B"));
-				user.setProfileImage("images/james-person-1.jpg");
+				Role adminRole = roleRepository.findByName("administrator").get();
+				Role customerRole = roleRepository.findByName("customer").get();
 
-				Optional<Role> optionalRole = roleRepository.findByName("administrator");
+				User adminUser = new User();
+				adminUser.setName("Mohammad Farhan Fajrul Haq");
+				adminUser.setEmail("farhan7534031b@gmail.com");
+				adminUser.setPhoneNumber("082188513499");
+				adminUser.setPassword(passwordEncoder.encode("indonesia123B"));
+				adminUser.setProfileImage("images/james-person-1.jpg");
+				adminUser.addRole(adminRole);
 
-				if (optionalRole.isPresent()) {
-					user.addRole(optionalRole.get());
-				}
+				userRepository.save(adminUser);
 
-				userRepository.save(user);
+				User customerUser = new User();
+				customerUser.setName("Mohammad Zydane");
+				customerUser.setEmail("zydan@gmail.com");
+				customerUser.setPhoneNumber("082188513499");
+				customerUser.setPassword(passwordEncoder.encode("indonesia123B"));
+				customerUser.setProfileImage("images/james-person-1.jpg");
+				customerUser.addRole(customerRole);
+
+				userRepository.save(customerUser);
 				return null;
 			} catch (Exception e) {
 				transactionStatus.setRollbackOnly(); // Rollback transaction on exception

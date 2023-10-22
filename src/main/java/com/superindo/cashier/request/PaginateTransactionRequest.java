@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PaginateProductVariantRequest extends Paginate {
-	private Long productId;
+public class PaginateTransactionRequest extends Paginate {
+
 }
