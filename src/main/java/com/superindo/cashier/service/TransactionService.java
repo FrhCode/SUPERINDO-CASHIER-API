@@ -91,6 +91,40 @@ public class TransactionService {
 
 		transaction.setTotalAmount(totalAmount);
 		transactionRepository.save(transaction);
+
+		return transaction;
+	}
+
+	@Transactional
+	public Transaction save(List<TransactionDetail> transactionDetails, User user) {
+		Transaction transaction = new Transaction();
+		transaction.setActive(true);
+		transaction.setTransactionNumber(generateInvoiceNumber());
+		transaction.setTotalAmount(new BigDecimal("0"));
+		transactionRepository.save(transaction);
+
+		BigDecimal totalAmount = new BigDecimal("0");
+
+		for (TransactionDetail transactionDetail : transactionDetails) {
+			Long qty = transactionDetail.getQty();
+			BigDecimal price = transactionDetail.getPrice();
+
+			BigDecimal subTotal = price.multiply(BigDecimal.valueOf(qty));
+
+			totalAmount = totalAmount.add(subTotal);
+
+			transactionDetail.setActive(true);
+			transactionDetail.setSubTotal(subTotal);
+			transactionDetail.setTransaction(transaction);
+			transactionDetailRepository.save(transactionDetail);
+		}
+
+		transaction.setTotalAmount(totalAmount);
+		transactionRepository.save(transaction);
+
+		List<Cart> carts = cartService.findByUser(user);
+		cartService.delete(carts);
+
 		return transaction;
 	}
 
@@ -108,7 +142,7 @@ public class TransactionService {
 			transactionDetails.add(transactionDetail);
 		}
 
-		return save(transactionDetails);
+		return save(transactionDetails, user);
 	}
 
 }

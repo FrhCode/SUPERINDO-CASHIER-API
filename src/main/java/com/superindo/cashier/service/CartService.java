@@ -49,4 +49,8 @@ public class CartService {
 		cartRepository.delete(cart);
 	}
 
+	public void delete(List<Cart> carts) {
+		cartRepository.deleteAll(carts);
+	}
+
 }
