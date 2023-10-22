@@ -70,7 +70,7 @@ public class CartContoller {
 
 		cartService.save(user, optionalProductVariant.get(), createCartRequest);
 
-		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("success"));
 	}
 
 	@PutMapping("{id}")
@@ -85,7 +85,7 @@ public class CartContoller {
 
 		cartService.save(optionalCart.get(), request);
 
-		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("success"));
 	}
 
 	@DeleteMapping("{id}")
@@ -99,7 +99,7 @@ public class CartContoller {
 
 		cartService.delete(optionalCart.get());
 
-		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("success"));
 	}
 }
 

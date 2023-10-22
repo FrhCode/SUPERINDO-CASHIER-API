@@ -55,4 +55,8 @@ public class ProductVariantService {
 
 		save(productVariant);
 	}
+
+	public long count(){
+		return productVariantRepository.count();
+	}
 }

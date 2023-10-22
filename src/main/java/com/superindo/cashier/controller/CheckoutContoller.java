@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.superindo.cashier.model.Transaction;
 import com.superindo.cashier.model.User;
-import com.superindo.cashier.repository.TransactionRepository;
 import com.superindo.cashier.response.MessageResponse;
 import com.superindo.cashier.service.JwtService;
 import com.superindo.cashier.service.PdfService;
@@ -32,7 +31,6 @@ public class CheckoutContoller {
 
 	private final JwtService jwtService;
 	private final TransactionService transactionService;
-	private final TransactionRepository transactionRepository;
 	private final PdfService pdfService;
 
 	@GetMapping("{id}/download")
@@ -57,13 +55,13 @@ public class CheckoutContoller {
 	}
 
 	@GetMapping
-	public ResponseEntity<MessageResponse> index(HttpServletRequest request)
+	public ResponseEntity<MessageResponse<String>> index(HttpServletRequest request)
 			throws FileNotFoundException, MalformedURLException {
 		User user = jwtService.getUser(request);
 
 		Long id = transactionService.save(user).getId();
 
 		return ResponseEntity.ok()
-				.body(new MessageResponse(Long.toString(id)));
+				.body(new MessageResponse<String>(Long.toString(id)));
 	}
 }

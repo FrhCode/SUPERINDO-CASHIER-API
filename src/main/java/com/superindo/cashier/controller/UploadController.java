@@ -25,7 +25,7 @@ public class UploadController {
 	public ResponseEntity<Object> uploadImage(@RequestParam("image") MultipartFile file) {
 		if (!file.getContentType().startsWith("image")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(new MessageResponse("Invalid file type. Only images are allowed."));
+					.body(new MessageResponse<String>("Invalid file type. Only images are allowed."));
 		}
 
 		try {
@@ -36,10 +36,11 @@ public class UploadController {
 			Files.write(path, bytes);
 
 			String relativePath = "uploads/" + fileName;
-			return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(relativePath));
+			return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>(relativePath));
 		} catch (Exception e) {
 			System.out.println(e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Error uploading image"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new MessageResponse<String>("Error uploading image"));
 		}
 	}
 }

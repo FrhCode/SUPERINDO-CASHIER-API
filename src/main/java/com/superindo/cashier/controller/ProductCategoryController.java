@@ -39,7 +39,7 @@ public class ProductCategoryController {
 	public ResponseEntity<Object> create(@Valid @RequestBody CreateProductCategoryRequest request) {
 		productCategoryService.create(request);
 
-		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("success"));
 	}
 
 	@PutMapping("{id}")
@@ -53,6 +53,6 @@ public class ProductCategoryController {
 
 		productCategoryService.update(optionalProductCategory.get(), request);
 
-		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("success"));
+		return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse<String>("success"));
 	}
 }

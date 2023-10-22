@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.superindo.cashier.model.Transaction;
-import com.superindo.cashier.repository.ProductRepository;
-import com.superindo.cashier.repository.ProductVariantCriteriaRepository;
 import com.superindo.cashier.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -17,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 @EnableJpaAuditing
 @RequiredArgsConstructor
 public class CashierApplication {
-	private final ProductVariantCriteriaRepository productVariantCriteriaRepository;
-	private final ProductRepository productRepository;
 	private final TransactionRepository transactionRepository;
 
 	@GetMapping

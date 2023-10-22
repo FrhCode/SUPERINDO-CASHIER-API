@@ -35,7 +35,7 @@ public class ProductVariantController {
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<MessageResponse> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponse<String>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdateProductVariantRequest request) {
 		Optional<ProductVariant> optionalProductVariant = productVariantService.findById(id);
 
@@ -45,14 +45,14 @@ public class ProductVariantController {
 
 		productVariantService.update(optionalProductVariant.get(), request);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse<String>("Created"));
 	}
 
 	@PostMapping
-	public ResponseEntity<MessageResponse> save(
+	public ResponseEntity<MessageResponse<String>> save(
 			@Valid @RequestBody UpdateProductVariantRequest request) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse<String>("Created"));
 	}
 
 }

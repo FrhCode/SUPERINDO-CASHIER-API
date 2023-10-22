@@ -50,4 +50,8 @@ public class ProductService {
 		product.setThumbnail(request.getThumbnail());
 		save(product);
 	}
+
+	public long count() {
+		return productRepository.count();
+	}
 }

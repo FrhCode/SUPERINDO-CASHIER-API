@@ -21,6 +21,7 @@ import com.superindo.cashier.model.User;
 import com.superindo.cashier.repository.TransactionDetailRepository;
 import com.superindo.cashier.repository.TransactionRepository;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -30,6 +31,7 @@ public class TransactionService {
 	private final ProductVariantService productVariantService;
 	private final TransactionDetailRepository transactionDetailRepository;
 	private final CartService cartService;
+	private final EntityManager em;
 
 	private long countInvoiceForADate(LocalDateTime dateTime) {
 		Calendar calendar = Calendar.getInstance(); // Get a Calendar instance
@@ -153,4 +155,27 @@ public class TransactionService {
 		return save(transactionDetails, user);
 	}
 
+	public List<Transaction> findAll() {
+		return transactionRepository.findAll();
+	}
+
+	public BigDecimal totalTransactionAmmount() {
+		List<Transaction> transactions = findAll();
+
+		BigDecimal totalAmount = transactions.stream()
+				.map(Transaction::getTotalAmount)
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+
+		return totalAmount;
+	}
+
+	public long count() {
+		return transactionRepository.count();
+	}
+
+	public List<Transaction> latest(Integer number) {
+		return em.createQuery("SELECT t FROM Transaction t ORDER BY t.createdDate DESC", Transaction.class)
+				.setMaxResults(number)
+				.getResultList();
+	}
 }

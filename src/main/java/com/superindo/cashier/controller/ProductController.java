@@ -56,7 +56,7 @@ public class ProductController {
 	}
 
 	@PostMapping
-	public ResponseEntity<MessageResponse> save(@Valid @RequestBody CreateProductRequest request) {
+	public ResponseEntity<MessageResponse<String>> save(@Valid @RequestBody CreateProductRequest request) {
 		Optional<ProductCategory> optionalProductCategory = productCategoryService.findById(request.getProductCategoryId());
 
 		if (optionalProductCategory.isEmpty()) {
@@ -65,11 +65,11 @@ public class ProductController {
 
 		productService.save(optionalProductCategory.get(), request);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse<String>("Created"));
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<MessageResponse> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponse<String>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdateProductRequest request) {
 
 		Optional<Product> optionalProduct = productService.findById(id);
@@ -80,7 +80,7 @@ public class ProductController {
 
 		productService.save(optionalProduct.get(), request);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse<String>("Created"));
 	}
 
 	// @GetMapping("{id}/variants")
@@ -100,7 +100,7 @@ public class ProductController {
 	// }
 
 	@PostMapping("{id}/variants")
-	public ResponseEntity<MessageResponse> createVariant(@PathVariable Long id,
+	public ResponseEntity<MessageResponse<String>> createVariant(@PathVariable Long id,
 			@Valid @RequestBody CreateProductVariantRequest request) {
 		Optional<Product> optionalProduct = productService.findById(id);
 
@@ -110,6 +110,6 @@ public class ProductController {
 
 		productVariantService.save(optionalProduct.get(), request);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Created"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse<String>("Created"));
 	}
 }
