@@ -21,6 +21,8 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
 import com.superindo.cashier.model.Transaction;
 import com.superindo.cashier.model.TransactionDetail;
 
@@ -54,29 +56,31 @@ public class PdfService {
 		document.add(new Paragraph("Invoice ini merupakan bukti pembayaran yang sah, dan diterbitkan atas nama Partner:"));
 
 		Table tableInvoiceIdentity = new Table(2);
-		tableInvoiceIdentity.setBorder(Border.NO_BORDER);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy HH:mm", new Locale("en", "US"));
 		String formattedDate = sdf.format(transaction.getCreatedDate());
 
-		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph("Nama").setBorder(Border.NO_BORDER)));
-		tableInvoiceIdentity
-				.addCell(new Cell().add(new Paragraph(transaction.getCreatedUser()).setBorder(Border.NO_BORDER)));
+		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph("Nama")).setBorder(Border.NO_BORDER));
 
-		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph("Tanggal").setBorder(Border.NO_BORDER)));
-		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph(formattedDate).setBorder(Border.NO_BORDER)));
+		tableInvoiceIdentity
+				.addCell(new Cell().add(new Paragraph(transaction.getCreatedUser())).setBorder(Border.NO_BORDER));
+
+		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph("Tanggal")).setBorder(Border.NO_BORDER));
+		tableInvoiceIdentity.addCell(new Cell().add(new Paragraph(formattedDate)).setBorder(Border.NO_BORDER));
 		document.add(tableInvoiceIdentity);
 
 		Set<TransactionDetail> transactionDetails = transaction.getTransactionDetails();
 		Table tableTransactionDetail = new Table(4);
+		tableTransactionDetail.setWidth(UnitValue.createPercentValue(100));
+
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("Nama").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("Nama")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("Harga").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("Harga")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("Qty").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("Qty")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("Sub-total").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("Sub-total")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
 		for (TransactionDetail transactionDetail : transactionDetails) {
 			String price = df.format(transactionDetail.getPrice());
 			String qty = df.format(transactionDetail.getQty());
@@ -84,28 +88,28 @@ public class PdfService {
 					.format(transactionDetail.getPrice().multiply(BigDecimal.valueOf(transactionDetail.getQty())));
 
 			tableTransactionDetail.addCell(
-					new Cell().add(new Paragraph(transactionDetail.getProductVariant().getName()).setBorder(Border.NO_BORDER)));
+					new Cell().add(new Paragraph(transactionDetail.getProductVariant().getName())).setBorder(Border.NO_BORDER));
 
 			tableTransactionDetail.addCell(
-					new Cell().add(new Paragraph(price).setBorder(Border.NO_BORDER)));
+					new Cell().add(new Paragraph(price)).setBorder(Border.NO_BORDER));
 
 			tableTransactionDetail.addCell(
-					new Cell().add(new Paragraph(qty).setBorder(Border.NO_BORDER)));
+					new Cell().add(new Paragraph(qty)).setBorder(Border.NO_BORDER));
 
 			tableTransactionDetail.addCell(
-					new Cell().add(new Paragraph(subtotal).setBorder(Border.NO_BORDER)));
+					new Cell().add(new Paragraph(subtotal)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
 
 		}
 		String totalAmmount = df.format(transaction.getTotalAmount());
 
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph("").setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
 		tableTransactionDetail.addCell(
-				new Cell().add(new Paragraph(totalAmmount).setBorder(Border.NO_BORDER)));
+				new Cell().add(new Paragraph(totalAmmount)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
 
 		document.add(new Paragraph(""));
 		document.add(tableTransactionDetail);

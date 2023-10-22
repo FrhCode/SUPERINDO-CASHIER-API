@@ -132,14 +132,6 @@ public class DevRunner implements CommandLineRunner {
 		cheetos.setThumbnail("images/GUEST_b9c6571e-95ba-4f20-bd17-e623f8d4ab7d.webp");
 		productRepository.save(cheetos);
 
-		Product indomie = new Product();
-		indomie.setPlu("PDCT0000002");
-		indomie.setName("Indomie");
-		indomie.setProductCategory(foodCategory);
-		indomie.setActive(true);
-		indomie.setThumbnail("images/indomie-ayam-bawang.png");
-		productRepository.save(indomie);
-
 		Product mieGaga = new Product();
 		mieGaga.setPlu("PDCT0000007");
 		mieGaga.setName("Mie gaga");
@@ -171,6 +163,14 @@ public class DevRunner implements CommandLineRunner {
 		rinso.setActive(true);
 		rinso.setThumbnail("images/20071828_2.jpg");
 		productRepository.save(rinso);
+
+		Product indomie = new Product();
+		indomie.setPlu("PDCT0000002");
+		indomie.setName("Indomie");
+		indomie.setProductCategory(foodCategory);
+		indomie.setActive(true);
+		indomie.setThumbnail("images/indomie-ayam-bawang.png");
+		productRepository.save(indomie);
 
 	}
 
