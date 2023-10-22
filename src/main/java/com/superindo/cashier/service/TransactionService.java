@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superindo.cashier.model.Cart;
+import com.superindo.cashier.model.ProductVariant;
 import com.superindo.cashier.model.Transaction;
 import com.superindo.cashier.model.TransactionDetail;
 import com.superindo.cashier.model.User;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TransactionService {
 	private final TransactionRepository transactionRepository;
+	private final ProductVariantService productVariantService;
 	private final TransactionDetailRepository transactionDetailRepository;
 	private final CartService cartService;
 
@@ -117,6 +119,12 @@ public class TransactionService {
 			transactionDetail.setSubTotal(subTotal);
 			transactionDetail.setTransaction(transaction);
 			transactionDetailRepository.save(transactionDetail);
+
+			ProductVariant productVariant = productVariantService.findById(transactionDetail.getProductVariant().getId())
+					.get();
+			productVariant.setQty(productVariant.getQty() - transactionDetail.getQty());
+			productVariantService.save(productVariant);
+
 		}
 
 		transaction.setTotalAmount(totalAmount);
