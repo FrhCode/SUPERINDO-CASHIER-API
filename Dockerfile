@@ -25,3 +25,5 @@ EXPOSE 8080
 RUN mv target/cashier-0.0.1-SNAPSHOT.jar .
 
 CMD ["java", "-jar", "cashier-0.0.1-SNAPSHOT.jar"]
+
+# java -jar cashier-0.0.1-SNAPSHOT.jar

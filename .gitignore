@@ -40,3 +40,4 @@ build/
 # Except application.properties and application-profile.properties
 
 *.pdf
+*.jar
