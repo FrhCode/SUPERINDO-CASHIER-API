@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if pm2 is installed
-        run: pm2 -v
+      # - name: Check if pm2 is installed
+      #   run: pm2 -v
+      - name: Debug PATH
+        run: echo $PATH
 
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
