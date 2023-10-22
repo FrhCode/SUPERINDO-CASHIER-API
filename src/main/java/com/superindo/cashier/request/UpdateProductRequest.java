@@ -1,5 +1,6 @@
 package com.superindo.cashier.request;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -13,4 +14,7 @@ public class UpdateProductRequest {
 
 	@NotNull(message = "active tidak boleh kosong")
 	private Boolean active;
+
+	@NotBlank(message = "thumbnail tidak boleh kosong")
+	private String thumbnail;
 }
