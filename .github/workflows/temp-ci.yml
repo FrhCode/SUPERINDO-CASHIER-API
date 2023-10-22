@@ -16,6 +16,7 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            sleep 4
             echo $PATH
             pm2 -v
             cd /var/www/api.cashier.farhandev.cloud
