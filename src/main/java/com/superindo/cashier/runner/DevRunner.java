@@ -123,6 +123,7 @@ public class DevRunner implements CommandLineRunner {
 	private void generateProduct() {
 		ProductCategory foodCategory = productCategoryRepository.findByName("Makanan").get();
 		ProductCategory drinkCategory = productCategoryRepository.findByName("Minuman").get();
+		ProductCategory detergenCategory = productCategoryRepository.findByName("Detergen").get();
 
 		Product cheetos = new Product();
 		cheetos.setPlu("PDCT0000001");
@@ -140,6 +141,14 @@ public class DevRunner implements CommandLineRunner {
 		indomie.setThumbnail("images/indomie-ayam-bawang.png");
 		productRepository.save(indomie);
 
+		Product mieGaga = new Product();
+		mieGaga.setPlu("PDCT0000007");
+		mieGaga.setName("Mie gaga");
+		mieGaga.setProductCategory(foodCategory);
+		mieGaga.setActive(true);
+		mieGaga.setThumbnail("images/mie-gaga-1340218801.webp");
+		productRepository.save(mieGaga);
+
 		Product airMineralAqua = new Product();
 		airMineralAqua.setPlu("PDCT0000002");
 		airMineralAqua.setName("Air Mineral Aqua");
@@ -147,6 +156,22 @@ public class DevRunner implements CommandLineRunner {
 		airMineralAqua.setActive(true);
 		airMineralAqua.setThumbnail("images/RDS_HTC_Products_481657_image_B608_422143147.jpg");
 		productRepository.save(airMineralAqua);
+
+		Product cola = new Product();
+		cola.setPlu("PDCT0000050");
+		cola.setName("Cola");
+		cola.setProductCategory(drinkCategory);
+		cola.setActive(true);
+		cola.setThumbnail("images/GUEST_7819ee30-1f78-46ee-a21c-d2096f99ba42.jpeg");
+		productRepository.save(cola);
+
+		Product rinso = new Product();
+		rinso.setPlu("PDCT0000050");
+		rinso.setName("Rinso");
+		rinso.setProductCategory(detergenCategory);
+		rinso.setActive(true);
+		rinso.setThumbnail("images/20071828_2.jpg");
+		productRepository.save(rinso);
 
 	}
 
