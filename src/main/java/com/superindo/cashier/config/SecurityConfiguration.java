@@ -25,7 +25,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 						.requestMatchers("/api/v1/auth/**").permitAll()
-						.requestMatchers("/images/*").permitAll()
+						.requestMatchers("/images/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/v1/checkout/*/download").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement(session -> session
