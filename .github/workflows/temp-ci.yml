@@ -18,11 +18,9 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            pm2 -v
-            node -v
             cd /var/www/api.cashier.farhandev.cloud
             git pull origin main
-            # mvn clean install
-            # mv target/cashier-0.0.1-SNAPSHOT.jar .
-            # pm2 delete cashier
-            # pm2 start "java -jar cashier-0.0.1-SNAPSHOT.jar" --name cashier
+            mvn clean install
+            mv target/cashier-0.0.1-SNAPSHOT.jar .
+            pm2 delete cashier
+            pm2 start "java -jar cashier-0.0.1-SNAPSHOT.jar" --name cashier
