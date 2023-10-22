@@ -31,7 +31,7 @@ public class UploadController {
 		try {
 			byte[] bytes = file.getBytes();
 			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-			Path path = Paths.get("uploads" + fileName);
+			Path path = Paths.get("uploads/" + fileName);
 
 			Files.write(path, bytes);
 
