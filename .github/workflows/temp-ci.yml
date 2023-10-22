@@ -17,6 +17,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             env
+            echo BROW
             whoami
             /home/farhan/.nvm/versions/node/v18.17.0/bin/pm2 -v
             cd /var/www/api.cashier.farhandev.cloud
