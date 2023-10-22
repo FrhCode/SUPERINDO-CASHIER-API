@@ -21,4 +21,7 @@ RUN mvn clean install
 EXPOSE 8080
 
 # CMD ["sleep", "infinity"]
-CMD ["java", "-jar", "target/cashier-0.0.1-SNAPSHOT.jar"]
+
+RUN mv target/cashier-0.0.1-SNAPSHOT.jar .
+
+CMD ["java", "-jar", "cashier-0.0.1-SNAPSHOT.jar"]
