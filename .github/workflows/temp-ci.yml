@@ -16,6 +16,8 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             /home/farhan/.nvm/versions/node/v18.17.0/bin/pm2 -v
             node -v
             cd /var/www/api.cashier.farhandev.cloud
