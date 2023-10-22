@@ -26,10 +26,7 @@ public class SecurityConfiguration {
 						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 						.requestMatchers("/api/v1/auth/**").permitAll()
 						.requestMatchers("/images/*").permitAll()
-						.requestMatchers(HttpMethod.GET, "/api/v1/symptoms/all").permitAll()
-						.requestMatchers(HttpMethod.GET, "/api/v1/consultations/*").permitAll()
-						.requestMatchers(HttpMethod.POST, "/api/v1/consultations").permitAll()
-						.requestMatchers(HttpMethod.GET, "/api/v1/consultations/*/download").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/v1/checkout/*/download").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement(session -> session
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
