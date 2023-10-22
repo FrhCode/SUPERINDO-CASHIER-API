@@ -20,6 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -59,6 +60,10 @@ public class User extends DateAudit implements UserDetails {
 	@Setter(AccessLevel.NONE)
 	@JsonIgnore
 	private final List<Role> roles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Cart> carts;
 
 	public void addRole(Role role) {
 		roles.add(role);

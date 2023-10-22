@@ -8,6 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.superindo.cashier.model.User;
+
 import java.util.function.Function;
 
 import io.jsonwebtoken.Claims;
@@ -15,14 +18,28 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 	@Value("${application.security.jwt.secret-key}")
 	private String secretKey;
 
 	@Value("${application.security.jwt.expiration}")
 	private long jwtExpiration;
+
+	private final UserService userService;
+
+	public User getUser(HttpServletRequest request) {
+		final String authHeader = request.getHeader("Authorization");
+		final String jwt = authHeader.substring(7);
+		String username = extractUsername(jwt);
+
+		User user = userService.findByEmail(username);
+		return user;
+	}
 
 	private Date extractExpiration(String token) {
 		return extractClaim(token, Claims::getExpiration);

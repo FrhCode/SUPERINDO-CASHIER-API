@@ -1,6 +1,5 @@
 package com.superindo.cashier.controller;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -23,7 +22,6 @@ import com.superindo.cashier.request.CreateProductVariantRequest;
 import com.superindo.cashier.request.PaginateProductRequest;
 import com.superindo.cashier.request.PaginateProductVariantRequest;
 import com.superindo.cashier.request.UpdateProductRequest;
-import com.superindo.cashier.response.BaseResponse;
 import com.superindo.cashier.response.MessageResponse;
 import com.superindo.cashier.service.ProductCategoryService;
 import com.superindo.cashier.service.ProductService;
