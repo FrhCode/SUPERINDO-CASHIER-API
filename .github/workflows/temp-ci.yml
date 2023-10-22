@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Check if pm2 is installed
-      #   run: pm2 -v
-      - name: Debug PATH
-        run: echo $PATH
-
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         with:
@@ -21,6 +16,8 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            echo $PATH
+            pm2 -v
             cd /var/www/api.cashier.farhandev.cloud
             git pull origin main
             mvn clean install
