@@ -16,6 +16,7 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            echo BROW
             /home/farhan/.nvm/versions/node/v18.17.0/bin/pm2 -v
             cd /var/www/api.cashier.farhandev.cloud
             git pull origin main
