@@ -128,7 +128,13 @@ public class TransactionService {
 
 			ProductVariant productVariant = productVariantService.findById(transactionDetail.getProductVariant().getId())
 					.get();
-			productVariant.setQty(productVariant.getQty() - transactionDetail.getQty());
+			long newQty = productVariant.getQty() - transactionDetail.getQty();
+
+			if (newQty < 0) {
+				throw new RuntimeException();
+			}
+
+			productVariant.setQty(newQty);
 			productVariantService.save(productVariant);
 
 		}
